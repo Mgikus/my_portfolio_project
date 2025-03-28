@@ -1,0 +1,170 @@
+@media (max-width: 600px) {
+
+
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+}
+
+    .product-list a {
+      height: 257px;
+    }
+
+    .product-list .product-item .product-name {
+      margin: 0 3px 0 6px;
+      font-size: 20px !important;
+    }
+
+    .sidebar .product-name {
+      font-size: 30px !important;
+    }
+
+    .product-card {
+      height: 257px !important;
+    }
+
+    .product-item {
+      height: 257px;
+    }
+
+    .product-image {
+      width: 150px;
+      height: 150px;
+    }
+
+    .product-detail {
+      flex-direction: column;
+      margin: 0;
+    }
+
+    .product-info {
+      margin-right: 0 !important;
+    }
+
+    .product-description {
+      width: 100%;
+      margin-top: 20% !important;
+    }
+
+    .product-desc {
+      width: 100% !important;
+    }
+
+    .product-detail-image {
+      width: 100% !important;
+      height: 100vw !important;
+      margin-right: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .sidebar {
+      padding: 20px 0 !important;
+      margin: 0 !important;
+    }
+
+    .star {
+      font-size: 1.7em !important;
+      margin-bottom: 20px;
+    }
+
+    .add-buttons {
+        display: flex;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        justify-content: center;
+        bottom: 0;
+        background: #FAF8F6;
+    }
+
+    .add-button {
+      width: 70%;
+      margin-bottom: 7px;
+    }
+
+    .like-button{
+      width: 15%;
+    }
+
+    .detail-product-name {
+      font-size: 2em;
+    }
+
+    .product-price {
+      margin: 15px 0 0 0 !important;
+      font-size: 1.9em;
+    }
+
+    .page-pd {
+      padding-bottom: 70px !important;
+    }
+
+    .search-form {
+      top: 0;
+    }
+
+    .swiper-container {
+      margin-top: 104px;
+      height: 250px;
+    }
+
+    .swiper-slide img {
+      height: auto;
+    }
+
+    h4.popular {
+      margin: 0;
+      padding: 0 20px;
+      font-size: 2em;
+    }
+
+    .banner-text {
+      top: 35px;
+      width: 100%;
+      left: 0;
+      padding: 0;
+      background-color: rgba(153, 0, 13);
+    }
+
+    .banner-title {
+      margin: 0 5px;
+      font-size: 1.7em;
+    }
+
+    .banner-description {
+      margin: 10px 5px;
+    }
+
+    #submit-button i {
+      display: none;
+    }
+
+    #submit-button {
+      display: none;
+    }
+
+    .confirm-button {
+      padding: 1.7%;
+      margin-bottom: 10px !important;
+    }
+
+    .index-block1 {
+        padding: 0;
+    }
+
+    .like-products h4 {
+      font-size: 2.3em;
+    }
+
+    ul.product-list p {
+      font-size: 1.8em;
+    }
+
+    .cart-style h4 {
+      font-size: 2.3em;
+    }
+
+    .cart-style p {
+      font-size: 1.8em;
+    }
+}

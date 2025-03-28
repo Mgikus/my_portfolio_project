@@ -1,0 +1,142 @@
+
+{% extends 'products/base.html' %}
+    <title>{{ product.name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+{% block body %}
+<div class="fade-in"> <!-- Анимируемый элемент -->
+    <div class="page-pd">
+            <div class="product-detail">
+                <div class="product-info">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-detail-image">
+                </div>
+                <div class="sidebar">
+                     <div class="average-rating">
+                        <div class="stars">
+                            {% for i in "12345" %}
+                                {% if i|floatformat:1 <= average_rating %}
+                                    <span class="star filled">★</span>
+                                {% else %}
+                                    <span class="star">☆</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <h3 class="detail-product-name">{{ product.name }}</h3>
+                    <h3 class="product-price">{{ product.price }} &#8381;</h3>
+                    <div class="add-buttons">
+                    <button class="add-button {% if added %}added{% endif %}" id="add-to-cart-button" data-product-id="{{ product.id }}">
+                        {% if added %}
+                            Добавить еще
+                        {% else %}
+                            Добавить в корзину
+                        {% endif %}
+                        </button>
+                        <button class="like-button {% if is_liked %}liked{% endif %}" id="add-to-like-button" data-product-id="{{ product.id }}">
+                            <i class="fa-{% if is_liked %}solid{% else %}regular{% endif %} fa-heart"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="product-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="description">Описание</button>
+                    <button class="tab-button" data-tab="composition">Состав</button>
+                    <button class="tab-button" data-tab="reviews">Отзывы</button>
+                </div>
+
+                <div class="tab-content">
+                    <div id="description" class="tab-pane active">
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <div id="composition" class="tab-pane">
+                        <p>{{ product.composition }}</p>
+                    </div>
+                    <div id="reviews" class="tab-pane">
+                        <p>Отзывы на данный момент находятся в разработке...</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+        <script>
+$(document).ready(function() {
+    // Обработчик для корзины
+    $('#add-to-cart-button').click(function() {
+        var productId = $(this).data('product-id');
+        console.log('Добавляем товар с ID:', productId);
+
+        $.ajax({
+            url: '{% url "add_to_cart" 0 %}'.replace('0', productId),
+            method: 'GET',
+            success: function(response) {
+                console.log('Товар добавлен в корзину!', response);
+                $('.cart-count').text('(' + response.cart_length + ')');
+                $('#add-to-cart-button')
+                    .text('Добавить еще')
+                    .addClass('added');
+                showNotification();
+            },
+            error: function(xhr, status, error) {
+                console.error('Ошибка:', error);
+            }
+        });
+    }); // Закрытие обработчика click
+}); // Закрытие обработчика ready
+
+$(document).ready(function() {
+    $('#add-to-like-button').click(function() {
+        const button = $(this);
+        const productId = button.data('product-id');
+
+        $.ajax({
+            url: '{% url "add_to_like" 0 %}'.replace('0', productId),
+            type: 'GET',
+            success: function(response) {
+                button.toggleClass('liked', response.is_liked);
+                const icon = button.find('i');
+                icon.toggleClass('fa-regular fa-solid');
+
+                // Показываем уведомление
+                showNotifications(response.message);
+            },
+            error: function(xhr) {
+                console.error('Ошибка:', xhr.responseText);
+            }
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Убираем активный класс у всех кнопок и вкладок
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => {
+                pane.classList.remove('active');
+                pane.style.display = 'none'; // Скрываем вкладку
+            });
+
+            // Добавляем активный класс к текущей кнопке и соответствующей вкладке
+            const tabId = this.getAttribute('data-tab');
+            this.classList.add('active');
+
+            // Показываем активную вкладку с анимацией
+            const activePane = document.getElementById(tabId);
+            activePane.style.display = 'block'; // Сначала показываем вкладку
+            setTimeout(() => {
+                activePane.classList.add('active'); // Затем добавляем класс для анимации
+            }, 10); // Небольшая задержка для запуска анимации
+        });
+    });
+});
+</script>
+{% endblock %}
+

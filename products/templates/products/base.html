@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_tablet.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_mobile.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <header>
+        {% block header %}
+        <nav>
+            <div class="nav-buttons">
+                <a href="{% url 'index' %}">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                <a href="{% url 'like' %}">
+                    <i class="fa-solid fa-heart"></i>
+                </a>
+                <a href="#" onclick="toggleSearch()" class="nav-button">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="{% url 'cart' %}">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">({{ cart|length }})</span>
+                </a>
+            </div>
+            <div class="navigation">
+                <div class="catalog-button-container">
+                    <a href="#" class="catalog-button">Каталог</a>
+                    <div class="category-container">
+                        <div class="category-content">
+                            {% for category in categories %}
+                                <a href="{% url 'category' category.id %}" class="category-link">{{ category.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="search-container" style="display">
+            <form method="GET" action="{% url 'search' %}" id="search-form" class="search-form">
+                <input type="text" name="q" id="search-input" placeholder="Я хочу купить...">
+                    <button type="submit" id="submit-button">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+            </form>
+        </div>
+
+        <div class="cart-notification">
+            <p>Товар добавлен в корзину</p>
+        </div>
+
+        <div class="like-notifications">
+            <p id="like-message"></p>
+        </div>
+        {% endblock %}
+    </header>
+
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
+    {% block scripts %}
+        <script>
+            function toggleSearch() {
+                var searchContainer = document.querySelector('.search-container');
+                searchContainer.classList.toggle('show');
+            };
+
+            document.querySelector('.catalog-button').addEventListener('click', function(e) {
+                e.stopPropagation();
+                var catalogContainer = document.querySelector('.category-container');
+                catalogContainer.classList.toggle('active');
+            });
+
+            function showNotification() {
+                const notification = $('.cart-notification');
+                notification.addClass('show');
+
+                // Автоматическое скрытие через 3 секунды
+                setTimeout(() => {
+                    notification.removeClass('show');
+                }, 2000);
+            };
+
+            function showNotifications(message) {
+                const notifications = $('.like-notifications');
+                notifications.find('#like-message').text(message);
+                notifications.addClass('show');
+
+                setTimeout(() => {
+                    notifications.removeClass('show');
+                }, 2000);
+            };
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                animateElements();
+
+                // Прокрутка к верхней части страницы через небольшую задержку
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                }, 100); // Задержка в 100 мс
+            });
+
+
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top <= window.innerHeight * 0.75 &&
+                    rect.bottom >= window.innerHeight * 0.25
+                );
+            }
+
+            function animateElements() {
+                const elements = document.querySelectorAll('.fade-in:not(.active)');
+
+                elements.forEach((el, index) => {
+                    if(isElementInViewport(el)) {
+                        const delay = index % 3 * 100;
+                        setTimeout(() => {
+                            el.classList.add('active');
+                        }, delay);
+                    }
+                });
+            }
+
+            // Инициализация
+            document.addEventListener('DOMContentLoaded', animateElements);
+            window.addEventListener('scroll', () => {
+                requestAnimationFrame(animateElements);
+            });
+            window.addEventListener('resize', animateElements);
+
+        </script>
+    {% endblock %}
+</body>
+</html>

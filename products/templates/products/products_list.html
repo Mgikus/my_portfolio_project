@@ -1,0 +1,15 @@
+{% block body %}
+<div class="fade-in"> <!-- Анимируемый элемент -->
+<ul class="product-list">
+    {% for product in products_list %}
+        <div class="product-card">
+            <a href="{% url 'product_detail' product.id %}">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="list-price">{{ product.price }} &#8381;</p>
+            </a>
+        </div>
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}

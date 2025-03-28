@@ -1,0 +1,58 @@
+
+{% include 'products/base.html' %}
+<title>Корзина</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+{% block body %}
+<div class="fade-in"> <!-- Анимируемый элемент -->
+    <div class="cart-style">
+        <div class="cart-products">
+            <h4>Корзина</h4>
+                {% if cart %}
+                    {% for key, item in cart.items %}
+                    <div class="cart-item">
+                        <div class =  "checkbox">
+                        <input type="checkbox" name="selected_items" value="{{ key }}" checked>
+                        </div>
+                        <div class="cart-image">
+                            <img src="{{ item.image }}" alt="{{ item.name }}" class="cart-img">
+                        </div>
+                        <div class="cart-info">
+                            <h3 class="cart-product-name">{{ item.name }}</h3>
+                            <div class="cart-buttons">
+                                <form action="{% url 'update_cart' key 'increase' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </form>
+                                <div class="cart-quantity">{{ item.quantity }}</div>
+                                <form action="{% url 'update_cart' key 'decrease' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                </form>
+                                <div class="cart-price">{{ item.price }} &#8381;</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+                <p>Пока что тут пусто, но это еще не поздно исправить...</p>
+            {% endif %}
+        </div>
+        {% if cart %}
+        <div class="checkout">
+            <h4>Всего {{ item.quantity }} товаров сумму</h4>
+            <h4>Итого: {{ total_price }} &#8381;</h4>
+            <button class="confirm-button">Оформить заказ</button>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

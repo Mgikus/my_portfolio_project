@@ -1,0 +1,74 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    {% extends 'products/base.html' %}
+
+</head>
+<body>
+{% block body %}
+<div class="fade-in"> <!-- Анимируемый элемент -->
+       <div class="swiper-container">
+           <div class="swiper-wrapper">
+               {% for banner in banners %}
+               <div class="swiper-slide">
+                   <a href="{{ banner.link }}">
+                       <img src="{{ banner.image.url }}" alt="{{ banner.title }}">
+                       <div class="banner-text">
+                           <h4 class="banner-title">{{ banner.title }}</h4>
+                           <h3 class="banner-description">{{ banner.description }}</h3>
+                       </div>
+                   </a>
+               </div>
+               {% endfor %}
+           </div>
+           <div class="swiper-button-next"></div>
+           <div class="swiper-button-prev"></div>
+           <div class="swiper-pagination"></div>
+       </div>
+    <div class="index-block1">
+        <h4 class="popular">Популярное</h4>
+        <ul class="product-list">
+          {% for product in products %}
+            <li class="product-item">
+              <div class="product-card">
+                  <a href="{% url 'product_detail' product.id %}">
+                      <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                      <h3 class="product-name">{{ product.name }}</h3>
+                      <h3 class="list-price">{{ product.price }} &#8381;</h3>
+                  </a>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var swiper = new Swiper('.swiper-container', {
+            autoplay: {
+                delay: 3000,
+            disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            loop: true,
+                });
+            });
+    </script>
+{% endblock %}
+</body>
+</html>

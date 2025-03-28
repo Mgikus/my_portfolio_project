@@ -1,0 +1,24 @@
+{% extends 'products/base.html' %}
+
+{% block body %}
+<div class="fade-in"> <!-- Анимируемый элемент -->
+    <div class="search-style">
+        <h4>Результаты поиска</h4>
+        <ul class="product-list">
+            {% for product in products_list %}
+                <li class="product-item">
+                    <div class="product-card">
+                        <a href="{% url 'product_detail' product.id %}">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                            <h3 class="product-name">{{ product.name }}</h3>
+                            <p class="list-price">{{ product.price }} &#8381;</p>
+                        </a>
+                    </div>
+                </li>
+            {% empty %}
+                <p>Извините, по вашему запросу ничего не найдено.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

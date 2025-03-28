@@ -1,0 +1,28 @@
+{% extends 'products/base.html' %}
+<title>Отложенное</title>
+{% load static %}
+
+{% block body %}
+<div class="fade-in"> <!-- Анимируемый элемент -->
+    <div class="like-style">
+        <div class="like-products">
+            <h4>Отложенное</h4>
+            <ul class="product-list">
+                {% for key, item in like.items %}
+                    <li class="product-item">
+                        <div class="product-card">
+                            <a href="{% url 'product_detail' key %}">
+                                <img src="{{ item.image }}" alt="{{ item.name }}" class="product-image">
+                                <h3 class="product-name">{{ item.name }}</h3>
+                                <p class="price">{{ item.price }} &#8381;</p>
+                            </a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <p>Похоже, вы еще ничего не добавили в отложенное(...</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
