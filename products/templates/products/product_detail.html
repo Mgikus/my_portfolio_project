@@ -5,7 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 {% block body %}
-<div class="fade-in"> <!-- Анимируемый элемент -->
+<div class="fade-in">
     <div class="page-pd">
             <div class="product-detail">
                 <div class="product-info">
@@ -65,7 +65,6 @@
 
         <script>
 $(document).ready(function() {
-    // Обработчик для корзины
     $('#add-to-cart-button').click(function() {
         var productId = $(this).data('product-id');
         console.log('Добавляем товар с ID:', productId);
@@ -85,8 +84,8 @@ $(document).ready(function() {
                 console.error('Ошибка:', error);
             }
         });
-    }); // Закрытие обработчика click
-}); // Закрытие обработчика ready
+    });
+});
 
 $(document).ready(function() {
     $('#add-to-like-button').click(function() {
@@ -101,7 +100,6 @@ $(document).ready(function() {
                 const icon = button.find('i');
                 icon.toggleClass('fa-regular fa-solid');
 
-                // Показываем уведомление
                 showNotifications(response.message);
             },
             error: function(xhr) {
@@ -117,23 +115,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     tabButtons.forEach(button => {
         button.addEventListener('click', function () {
-            // Убираем активный класс у всех кнопок и вкладок
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabPanes.forEach(pane => {
                 pane.classList.remove('active');
-                pane.style.display = 'none'; // Скрываем вкладку
+                pane.style.display = 'none';
             });
 
-            // Добавляем активный класс к текущей кнопке и соответствующей вкладке
             const tabId = this.getAttribute('data-tab');
             this.classList.add('active');
 
-            // Показываем активную вкладку с анимацией
             const activePane = document.getElementById(tabId);
-            activePane.style.display = 'block'; // Сначала показываем вкладку
+            activePane.style.display = 'block';
             setTimeout(() => {
-                activePane.classList.add('active'); // Затем добавляем класс для анимации
-            }, 10); // Небольшая задержка для запуска анимации
+                activePane.classList.add('active');
+            }, 10);
         });
     });
 });

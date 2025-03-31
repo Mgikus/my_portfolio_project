@@ -1,7 +1,3 @@
-html {
-    /*scrollbar-gutter: stable;*/
-}
-
 h4,
 button,
 a,
@@ -121,12 +117,12 @@ nav a:hover {
 }
 
 .product-item {
-    margin: 0; /* Убираем вертикальные отступы */
-    width: 100%; /* Занимаем всю ширину ячейки сетки */
+    margin: 0;
+    width: 100%;
 }
 
 .product-card {
-    position: relative; /* Добавляем для правильного позиционирования */
+    position: relative;
     border-radius: 5px;
     text-align: center;
     height: 25vw;
@@ -550,7 +546,7 @@ input#search-input {
 
 .swiper-container {
     width: 100%;
-    height: 73vh; /* Явная высота */
+    height: 73vh;
     position: relative;
     max-width: 100%;
     z-index: 1;
@@ -673,8 +669,6 @@ h4.popular {
     display: grid;
 }
 
-
-
 @media (max-width: 1200px) {
     .category-container.active {
       transform: translateX(0);
@@ -735,31 +729,29 @@ h4.popular {
 .cart-notification {
     position: fixed;
     top: 110px;
-    right: -300px; /* Начальное положение за пределами экрана */
+    right: -300px;
     background-color: #9b000d;
     border: 2px solid wheat;
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    transition: right 0.5s ease-in-out, opacity 0.5s ; /* Анимируем свойство right */
-    opacity: 0; /* Начальная прозрачность */
+    transition: right 0.5s ease-in-out, opacity 0.5s ;
+    opacity: 0;
     color: wheat;
     border-radius: 13px;
 }
 
 .cart-notification.show {
-    right: 20px; /* Конечное положение */
-    opacity: 1; /* Появление */
+    right: 20px;
+    opacity: 1;
 }
 
-/* Стили для контейнера вкладок */
 .product-tabs {
     margin-top: 100px;
     border-radius: 5px;
     overflow: hidden;
 }
 
-/* Стили для кнопок вкладок */
 .tab-buttons {
     display: flex;
     border-bottom: 1px solid #9b000d;
@@ -784,7 +776,6 @@ h4.popular {
     background-color: #eee;
 }
 
-/* Стили для контента вкладок */
 .tab-content {
     padding: 20px;
 }
@@ -792,14 +783,14 @@ h4.popular {
 .tab-pane {
     display: none;
     opacity: 0;
-    transform: translateX(-50px); /* Сдвиг вниз для эффекта появления */
-    transition: opacity 0.8s ease, transform 0.8s ease; /* Плавный переход */
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .tab-pane.active {
     display: block;
     opacity: 1;
-    transform: translateX(0); /* Возвращаем на место */
+    transform: translateX(0);
 }
 
 .tab-pane p {
@@ -839,7 +830,7 @@ h4.popular {
 }
 
 .fade-in {
-    min-height: 50vh; /* Гарантирует достаточную высоту для срабатывания анимации */
+    min-height: 50vh;
     opacity: 0;
     transition: all 1.7s ease-out;
 }
@@ -848,7 +839,6 @@ h4.popular {
     opacity: 1;
 }
 
-    /* Задержки */
 .delay-1 { transition-delay: 0.2s !important; }
 .delay-2 { transition-delay: 0.4s !important; }
 .delay-3 { transition-delay: 0.6s !important; }
@@ -880,21 +870,19 @@ ul.product-list p {
 .like-notifications {
     position: fixed;
     top: 110px;
-    right: -300px; /* Начальное положение за пределами экрана */
+    right: -300px;
     background-color: #9b000d;
     border: 2px solid wheat;
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    transition: right 0.5s ease-in-out, opacity 0.5s ; /* Анимируем свойство right */
-    opacity: 0; /* Начальная прозрачность */
+    transition: right 0.5s ease-in-out, opacity 0.5s ;
+    opacity: 0;
     color: wheat;
     border-radius: 13px;
 }
 
 .like-notifications.show {
-    right: 20px; /* Конечное положение */
-    opacity: 1; /* Появление */
+    right: 20px;
+    opacity: 1;
 }
-
-

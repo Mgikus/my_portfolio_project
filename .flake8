@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 91
+ignore =
+    E203,
+    E266,
+exclude =
+    .git,
+    __pycache__,
+    migrations,
+    venv,
+    .idea

@@ -85,7 +85,6 @@
                 const notification = $('.cart-notification');
                 notification.addClass('show');
 
-                // Автоматическое скрытие через 3 секунды
                 setTimeout(() => {
                     notification.removeClass('show');
                 }, 2000);
@@ -105,10 +104,9 @@
             document.addEventListener('DOMContentLoaded', () => {
                 animateElements();
 
-                // Прокрутка к верхней части страницы через небольшую задержку
                 setTimeout(() => {
                     window.scrollTo(0, 0);
-                }, 100); // Задержка в 100 мс
+                }, 100);
             });
 
 
@@ -133,7 +131,6 @@
                 });
             }
 
-            // Инициализация
             document.addEventListener('DOMContentLoaded', animateElements);
             window.addEventListener('scroll', () => {
                 requestAnimationFrame(animateElements);
